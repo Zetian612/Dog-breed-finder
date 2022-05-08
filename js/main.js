@@ -11,20 +11,22 @@ btnSend.addEventListener("click", (e) => {
 
 const getBreed = () => {
   const breed = document.getElementById("buscar").value;
-
-  fetchData(breed.toLowerCase());
+  let urlBreed = breed.replace(/\s/g, "/");
+  console.log(urlBreed);
+  fetchData(urlBreed);
+  
 };
 
-const fetchData = async (breed) => {
+const fetchData = async (urlBreed) => {
   const res = await fetch(
-    "https://dog.ceo/api/breed/" + breed + "/images/random/5"
+    "https://dog.ceo/api/breed/"+urlBreed+"/images/random/5"
   )
     .then((res) => res.json())
     .then((res) => {
         pintarCards(res);
     })
     .catch((err) => 
-        alert("No se encontraron resultados")
+        alert("No se encontraron resultados, intente con otra raza")
     );
 };
 
